@@ -28,8 +28,13 @@ def poland_cases_by_date(day: int, month: int, year: int = 2020) -> int:
     :return: Number of cases on a given date as an integer
     """
     
-    # Your code goes here (remove pass)
-    pass
+    date = datetime.date(year, month, day)
+    yesterday = date + datetime.timedelta(days=-1)
+    today = date.strftime('%m/%d/').replace("0", "") + date.strftime('%y')
+    yesterday = yesterday.strftime('%m/%d/').replace("0", "") + yesterday.strftime('%y')
+
+    result = confirmed_cases.loc[confirmed_cases["Country/Region"] == "Poland"][today].values[0]
+    return result
 
 
 def top5_countries_by_date(day: int, month: int, year: int = 2020) -> List[str]:
